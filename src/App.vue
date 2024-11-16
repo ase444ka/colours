@@ -23,9 +23,27 @@ import { RouterLink, RouterView } from 'vue-router'
     </address>
     <nav>
       <ul>
-        <li><RouterLink to="/">лупа</RouterLink></li>
-        <li><RouterLink to="/">человек</RouterLink></li>
-        <li><RouterLink to="/">сердечко</RouterLink></li>
+        <li>
+          <RouterLink to="/">
+            <svg>
+              <use href="@/assets/sprites.svg#magnify"></use>
+            </svg>
+          </RouterLink>
+        </li>
+        <li>
+          <RouterLink to="/">
+            <svg>
+              <use href="@/assets/sprites.svg#user"></use>
+            </svg>
+          </RouterLink>
+        </li>
+        <li>
+          <RouterLink to="/">
+            <svg>
+              <use href="@/assets/sprites.svg#heart"></use>
+            </svg>
+          </RouterLink>
+        </li>
         <li><RouterLink to="/">кружочек</RouterLink></li>
       </ul>
     </nav>
@@ -39,5 +57,16 @@ header {
   width: 100%;
   display: grid;
   grid-template-columns: auto 1fr auto auto;
+}
+nav ul {
+  display: flex;
+  gap: 25px;
+}
+li {
+  flex-basis: 20px;
+}
+svg {
+  width: 100%;
+  height: 100%;
 }
 </style>
