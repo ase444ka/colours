@@ -8,8 +8,8 @@ import { RouterLink, RouterView } from 'vue-router'
     <div class="logo">
       <IconLogo />
     </div>
-    <nav>
-      <ul>
+    <nav class="main-nav">
+      <ul class="main-nav__ul">
         <li><RouterLink to="/">продукты</RouterLink></li>
         <li><RouterLink to="/">цвета</RouterLink></li>
         <li><RouterLink to="/">вдохновение</RouterLink></li>
@@ -19,9 +19,9 @@ import { RouterLink, RouterView } from 'vue-router'
     </nav>
     <address class="phone">
       <a class="phone__link" href="tel:+74952217769">+7 (495) 221-77-69</a>
-      <div class="phone__text">заказать звонок</div>
+      <div class="phone__text">Заказать звонок</div>
     </address>
-    <nav>
+    <nav class="second-nav">
       <ul>
         <li>
           <RouterLink to="/">
@@ -44,7 +44,7 @@ import { RouterLink, RouterView } from 'vue-router'
             </svg>
           </RouterLink>
         </li>
-        <li><RouterLink to="/">кружочек</RouterLink></li>
+        <li><RouterLink to="/" class="cart-link">1</RouterLink></li>
       </ul>
     </nav>
   </header>
@@ -52,21 +52,65 @@ import { RouterLink, RouterView } from 'vue-router'
   <RouterView />
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+.logo {
+  width: 131px;
+}
 header {
   width: 100%;
   display: grid;
   grid-template-columns: auto 1fr auto auto;
+  nav ul {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: start;
+    gap: 24px;
+    li {
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+  }
 }
-nav ul {
-  display: flex;
-  gap: 25px;
+
+.main-nav {
+  margin-left: 180px;
+  li {
+    display: flex;
+  }
 }
-li {
-  flex-basis: 20px;
+
+.second-nav {
+  justify-self: end;
+  li {
+    width: 22px;
+    height: 22px;
+  }
+  .cart-link {
+    border-radius: 50%;
+    background-color: var(--green);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 12px;
+  }
 }
+
 svg {
   width: 100%;
   height: 100%;
+}
+.phone {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 100%;
+  margin-right: 100px;
+  &__text {
+    opacity: 0.3;
+    font-size: 14px;
+    line-height: 100%;
+  }
 }
 </style>
