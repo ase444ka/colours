@@ -82,37 +82,5 @@ const filters = ref([
     gap: 24px;
   }
 }
-.product {
-  cursor: default;
-  border-bottom: 1px solid var(--grey2);
-  & > div {
-    margin-bottom: 20px;
-  }
-  &__title {
-    font-weight: 300;
-  }
-  &__details {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  &__price {
-    font-weight: bold;
-  }
-  &__button {
-    width: 80px;
-    height: 32px;
-    background-color: var(--grey2);
-    border-radius: 8px;
-    display: grid;
-    place-items: center;
-    svg {
-      width: 16px;
-      height: 16px;
-    }
-    &:hover {
-      background-color: var(--green);
-    }
-  }
-}
+
 </style>
