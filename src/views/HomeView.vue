@@ -1,7 +1,19 @@
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import TogglerItem from '@/components/ui/TogglerItem.vue'
 import SliderComponent from '@/components/SliderComponent.vue'
+import api from '@/api'
+
+const products = ref([])
+async function getProducts() {
+  try {
+    products.value = await api.getProducts()
+  } catch (e) {
+    alert('не удалось получить продукты, ошибка ', e.message)
+  }
+}
+
+onMounted(getProducts)
 const filters = ref([
   {
     label: 'новинки',
@@ -43,7 +55,12 @@ function upd(v) {
           <TogglerItem v-for="f in filters" :key="f.label" v-model="f.checked" :label="f.label" />
         </div>
         <div class="content__catalog">
-          <div class="catalog__title">товары</div>
+          <div class="catalog__title">
+            <div v-for="p in products">
+              <img :src="p.img" alt="p.title" />
+              <p>{{ p.title }} - {{ p.price }}</p>
+            </div>
+          </div>
           <div class="catalog__products">список товаров</div>
         </div>
       </div>
