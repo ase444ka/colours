@@ -1,4 +1,5 @@
 <script setup>
+import ProductComponent from '@/components/ProductComponent.vue'
 import { onMounted, ref } from 'vue'
 import TogglerItem from '@/components/ui/TogglerItem.vue'
 import SliderComponent from '@/components/SliderComponent.vue'
@@ -8,6 +9,7 @@ const products = ref([])
 async function getProducts() {
   try {
     products.value = await api.getProducts()
+    console.log(products.value)
   } catch (e) {
     alert('не удалось получить продукты, ошибка ', e.message)
   }
@@ -41,9 +43,6 @@ const filters = ref([
     checked: false,
   },
 ])
-function upd(v) {
-  console.log('upd ', v)
-}
 </script>
 
 <template>
@@ -55,13 +54,10 @@ function upd(v) {
           <TogglerItem v-for="f in filters" :key="f.label" v-model="f.checked" :label="f.label" />
         </div>
         <div class="content__catalog">
-          <div class="catalog__title">
-            <div v-for="p in products">
-              <img :src="p.img" alt="p.title" />
-              <p>{{ p.title }} - {{ p.price }}</p>
-            </div>
+          <div class="content__title"></div>
+          <div class="content__products">
+            <ProductComponent v-for="product in products" :product="product" />
           </div>
-          <div class="catalog__products">список товаров</div>
         </div>
       </div>
     </div>
@@ -74,10 +70,49 @@ function upd(v) {
   display: grid;
   grid-template-columns: 180px 1fr;
   gap: 110px;
+
   &__filters {
     display: flex;
     flex-direction: column;
     gap: 10px;
+  }
+  &__products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 24px;
+  }
+}
+.product {
+  cursor: default;
+  border-bottom: 1px solid var(--grey2);
+  & > div {
+    margin-bottom: 20px;
+  }
+  &__title {
+    font-weight: 300;
+  }
+  &__details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__price {
+    font-weight: bold;
+  }
+  &__button {
+    width: 80px;
+    height: 32px;
+    background-color: var(--grey2);
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+    &:hover {
+      background-color: var(--green);
+    }
   }
 }
 </style>
