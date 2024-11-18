@@ -11,7 +11,6 @@ mock.onGet('/products').reply(function () {
   let id = 1
   const products = []
   for (let i = 0; i < 30; i++) {
-    console.log(i)
     products.push({
       id: id++,
       title: 'Краска Wallquest, Brownsone MS90102',
