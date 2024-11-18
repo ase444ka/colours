@@ -3,13 +3,14 @@ import ProductComponent from '@/components/ProductComponent.vue'
 import { onMounted, ref } from 'vue'
 import TogglerItem from '@/components/ui/TogglerItem.vue'
 import SliderComponent from '@/components/SliderComponent.vue'
-import api from '@/api'
 
-const products = ref([])
+import { useProductStore } from '@/store'
+
+const productStore = useProductStore()
 async function getProducts() {
   try {
-    products.value = await api.getProducts()
-    console.log(products.value)
+    await productStore.getProducts()
+    console.log(productStore.products.value)
   } catch (e) {
     alert('не удалось получить продукты, ошибка ', e.message)
   }
@@ -56,7 +57,7 @@ const filters = ref([
         <div class="content__catalog">
           <div class="content__title"></div>
           <div class="content__products">
-            <ProductComponent v-for="product in products" :product="product" />
+            <ProductComponent v-for="product in productStore.products" :product="product" />
           </div>
         </div>
       </div>
@@ -82,5 +83,4 @@ const filters = ref([
     gap: 24px;
   }
 }
-
 </style>

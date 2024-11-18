@@ -1,7 +1,8 @@
 <script setup>
 import { defineProps } from 'vue'
-
+import { useProductStore } from '@/store'
 defineProps(['product'])
+const productStore = useProductStore()
 </script>
 
 <template>
@@ -14,8 +15,10 @@ defineProps(['product'])
     </div>
     <div class="product__details">
       <div class="product__price">{{ product.price }} ₽</div>
-      <button class="product__button">
-        1
+      <button class="product__button" @click="productStore.addToCart(product.id)">
+        <span v-if="product.orderedCount">
+          {{ product.orderedCount }}
+        </span>
         <svg>
           <use href="@/assets/sprites.svg#plus"></use>
         </svg>
