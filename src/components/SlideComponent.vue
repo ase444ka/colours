@@ -22,7 +22,7 @@ const props = defineProps(['img', 'title', 'text'])
   }
   &__content {
     position: absolute;
-    z-index: 10000;
+    z-index: 100;
     color: var(--white);
     left: calc(50% - 300px);
     top: calc(50% - 100px);
