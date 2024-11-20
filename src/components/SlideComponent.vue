@@ -55,7 +55,7 @@ const colorClass = computed(() =>
 }
 .carousel__pagination {
   gap: 6px;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: var(--grey3);
   border-radius: 18px;
   padding: 15px !important;
 }

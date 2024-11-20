@@ -156,7 +156,7 @@ watch(
   &__close {
     background-repeat: no-repeat;
     padding: 15px;
-    border: 1px solid rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--grey3);
     border-radius: 50%;
     width: 48px;
     height: 48px;
@@ -183,13 +183,13 @@ watch(
     justify-content: space-between;
   }
   &__clear {
-    color: rgba(0, 0, 0, 0.4);
+    color: var(--grey3);
   }
   &__item {
     display: grid;
     grid-template-columns: max-content 220px repeat(4, max-content);
     align-items: center;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid var(--grey1);
     gap: 20px;
     padding: 25px 0;
     &__img {
@@ -201,6 +201,9 @@ watch(
     }
     &__price {
       font-weight: 600;
+    }
+    &__remove-restore {
+      background-color: var(--grey2);
     }
     button svg {
       height: 24px;

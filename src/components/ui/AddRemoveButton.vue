@@ -25,16 +25,9 @@ const svgHref = computed(() =>
   svg {
     width: 16px;
     height: 16px;
+    background-color: inherit;
   }
-  &:hover {
-    transform: translate3d(1px, 1px, 1px);
-  }
-  &:hover {
-    transform: translate3d(1px, 1px, 1px);
-    -webkit-box-shadow: 2px 2px 20px -7px rgba(34, 60, 80, 0.2);
-    -moz-box-shadow: 2px 2px 20px -7px rgba(34, 60, 80, 0.2);
-    box-shadow: 2px 2px 20px -7px rgba(34, 60, 80, 0.2);
-  }
+
   &-activated {
     background-color: var(--green);
   }
