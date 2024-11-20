@@ -1,5 +1,5 @@
 <script setup>
-import AddRemoveButton from '@/components/ui/AddRemoveButton.vue'
+import CartItemComponent from './CartItemComponent.vue'
 import { useProductStore } from '@/store'
 const productStore = useProductStore()
 const emit = defineEmits(['hide'])
@@ -62,40 +62,7 @@ watch(
         </div>
       </Transition>
       <div class="cart__items" v-if="productStore.orderedProducts.length">
-        <div
-          class="cart__item"
-          v-for="p in productStore.orderedProducts"
-          :class="p.isRemoved ? 'cart__item_removed' : ''"
-        >
-          <div class="cart__item__img">
-            <img :src="p.img" :alt="p.title" />
-          </div>
-          <div class="cart__item__description">
-            <div class="cart__item__title">{{ p.title }}</div>
-            <div class="cart__item__price">{{ p.orderedCount * p.price }} ₽</div>
-          </div>
-          <AddRemoveButton @click="productStore.addToCart(p.id)" :disabled="p.isRemoved" />
-          <div class="cart__item__count">{{ p.orderedCount }}</div>
-          <AddRemoveButton
-            :remove="true"
-            @click="productStore.removeFromCart(p.id)"
-            :disabled="p.isRemoved"
-          />
-          <button
-            class="cart__item__button_remove"
-            @click="
-              p.isRemoved ? productStore.restoreToCart(p.id) : productStore.removeItemFromCart(p.id)
-            "
-          >
-            <svg>
-              <use
-                :href="
-                  p.isRemoved ? '/src/assets/sprites.svg#restore' : '/src/assets/sprites.svg#cross'
-                "
-              ></use>
-            </svg>
-          </button>
-        </div>
+        <CartItemComponent :product="p" v-for="p in productStore.orderedProducts" />
       </div>
       <div v-else class="cart__empty-message">Корзина пуста</div>
       <Transition>
@@ -149,6 +116,7 @@ watch(
   &__header {
     display: flex;
     justify-content: space-between;
+    padding-bottom: 40px;
   }
   .p-10 {
     padding: 10px 0;
