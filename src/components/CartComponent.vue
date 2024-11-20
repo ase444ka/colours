@@ -1,4 +1,5 @@
 <script setup>
+import AddRemoveButton from './ui/AddRemoveButton.vue'
 import { useProductStore } from '@/store'
 const productStore = useProductStore()
 const emit = defineEmits(['hide'])
@@ -39,7 +40,31 @@ watch(
         </button>
       </div>
 
-      <div class="modal__content"></div>
+      <div class="modal__content">
+        <div class="cart">
+          <div class="cart__header">
+            <div class="cart__total">4 товара</div>
+            <button class="cart__clear">очистить список</button>
+          </div>
+          <div class="cart__item">
+            <div class="cart__item__img">
+              <img src="@/assets/photos/1.png" alt="фото краски" />
+            </div>
+            <div class="cart__item__description">
+              <div class="cart__item__title">Краска Wallquest, Brownsone MS90102</div>
+              <div class="cart__item__price">9600 ₽</div>
+            </div>
+            <AddRemoveButton />
+            <div class="cart__item__count">5</div>
+            <AddRemoveButton :remove="true" />
+            <button class="cart__item__button_remove">
+              <svg>
+                <use href="@/assets/sprites.svg#cross"></use>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -103,5 +128,29 @@ watch(
 
 .modal__content {
   margin-top: 14px;
+}
+.cart {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__item {
+    display: grid;
+    grid-template-columns: max-content 220px repeat(4, 1fr);
+    align-items: center;
+    &__img {
+      width: 96px;
+      height: 96px;
+    }
+    &__title {
+      font-weight: 300;
+    }
+    &__price {
+      font-weight: 600;
+    }
+    button svg {
+      height: 20px;
+    }
+  }
 }
 </style>

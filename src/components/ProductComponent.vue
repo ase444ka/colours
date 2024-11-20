@@ -1,8 +1,12 @@
 <script setup>
-import { defineProps } from 'vue'
+import AddRemoveButton from './ui/AddRemoveButton.vue'
+import { computed } from 'vue'
 import { useProductStore } from '@/store'
-defineProps(['product'])
+const props = defineProps(['product'])
 const productStore = useProductStore()
+const isActivatedClass = computed(() =>
+  productStore.orderedProducts.includes(props.product) ? 'add-remove-button-activated' : '',
+)
 </script>
 
 <template>
@@ -15,14 +19,7 @@ const productStore = useProductStore()
     </div>
     <div class="product__details">
       <div class="product__price">{{ product.price }} ₽</div>
-      <button class="product__button" @click="productStore.addToCart(product.id)">
-        <span v-if="product.orderedCount">
-          {{ product.orderedCount }}
-        </span>
-        <svg>
-          <use href="@/assets/sprites.svg#plus"></use>
-        </svg>
-      </button>
+      <AddRemoveButton @click="productStore.addToCart(product.id)" :class="isActivatedClass" />
     </div>
   </div>
 </template>
