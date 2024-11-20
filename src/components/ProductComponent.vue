@@ -1,5 +1,5 @@
 <script setup>
-import AddRemoveButton from './ui/AddRemoveButton.vue'
+import AddRemoveButton from '@/components/ui/AddRemoveButton.vue'
 import { computed } from 'vue'
 import { useProductStore } from '@/store'
 const props = defineProps(['product'])

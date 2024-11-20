@@ -48,6 +48,7 @@ const filters = ref([
 
 <template>
   <main>
+    
     <SliderComponent />
     <div class="container">
       <div class="content">

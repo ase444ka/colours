@@ -1,12 +1,27 @@
 <script setup>
+import CartComponent from '@/components/CartComponent.vue'
 import IconLogo from '@/components/icons/IconLogo.vue'
 import { useProductStore } from '@/store'
 import { RouterLink } from 'vue-router'
+import { ref } from 'vue'
+
+const cartIsShowing = ref(false)
+const showCart = () => {
+  cartIsShowing.value = true
+}
+const hideCart = () => {
+  cartIsShowing.value = false
+}
 
 const productStore = useProductStore()
 </script>
 
 <template>
+  <Teleport to="body">
+    <Transition>
+      <CartComponent :isShowing="cartIsShowing" @hide="hideCart" v-show="cartIsShowing" />
+    </Transition>
+  </Teleport>
   <header>
     <div class="container">
       <div class="header-wrapper">
@@ -50,7 +65,7 @@ const productStore = useProductStore()
               </RouterLink>
             </li>
             <li>
-              <RouterLink to="/" class="cart-link">{{ productStore.orderedCount }}</RouterLink>
+              <button class="cart-link" @click="showCart">{{ productStore.orderedCount }}</button>
             </li>
           </ul>
         </nav>
@@ -121,5 +136,15 @@ svg {
     font-size: 14px;
     line-height: 100%;
   }
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.9s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>
