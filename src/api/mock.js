@@ -3,7 +3,7 @@ import MockAdapter from 'axios-mock-adapter'
 
 export const mock = new MockAdapter(axios)
 
-const randomBool = () => !!((Math.random() * 10) % 2)
+const randomBool = () => !!(Math.round(Math.random() * 10) % 2)
 const randomPrice = () => Math.floor(Math.random() * 10000)
 const randomImg = () => Math.floor(1 + Math.random() * 9)
 
