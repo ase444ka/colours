@@ -16,12 +16,18 @@ export const useProductStore = defineStore({
     orderedCount() {
       return this.orderedProducts.reduce((p, c) => (p += c.orderedCount), 0)
     },
+    orderedPrice() {
+      return this.orderedProducts.reduce((p, c) => (p += c.orderedCount * c.price), 0)
+    },
+    removedItems() {
+      return this.orderedProducts.filter((p) => p.isRemoved)
+    },
   },
 
   actions: {
     async getProducts() {
       const rawProducts = await productsApi.getProducts()
-      this.products = rawProducts.map((p) => ({ ...p, orderedCount: 0 }))
+      this.products = rawProducts.map((p) => ({ ...p, orderedCount: 0, isRemoved: false }))
     },
     addToCart(id) {
       const p = this.getProductById(id)
@@ -29,25 +35,30 @@ export const useProductStore = defineStore({
     },
     removeFromCart(id) {
       const p = this.getProductById(id)
-      const count = p.orderedCount
-      p.orderedCount = 0
-      this.deletedFromCart.push({ id, count })
-    },
-    restoreToCart(id) {
-      const found = this.deletedFromCart.find((item) => item.id === id)
-      if (found) {
-        const p = this.getProductById(found.id)
-        p.orderedCount = found.count
-        this.deletedFromCart.splice(foundIndex, 1)
-      }
-    },
-    removeItemFromCart(id) {
-      const p = this.getProductById(id)
       if (p.orderedCount === 1) {
-        this.removeFromCart(id)
+        this.removeItemFromCart(id)
       } else {
         p.orderedCount--
       }
     },
+    removeItemFromCart(id) {
+      const p = this.getProductById(id)
+      p.isRemoved = true
+    },
+    restoreToCart(id) {
+      const p = this.getProductById(id)
+      p.isRemoved = false
+    },
+
+    clearCart() {
+      this.orderedProducts.forEach(p => p.isRemoved = true)
+    }
+  },
+
+  clearRemoved() {
+    this.removedItems.forEach((p) => {
+      p.isRemoved = false
+      p.orderedCount = 0
+    })
   },
 })

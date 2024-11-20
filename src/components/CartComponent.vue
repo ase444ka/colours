@@ -4,13 +4,26 @@ import { useProductStore } from '@/store'
 const productStore = useProductStore()
 const emit = defineEmits(['hide'])
 const props = defineProps(['isShowing'])
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 
 const hide = () => {
   emit('hide')
 }
 
 const showClass = ref('')
+
+const countString = computed(() => {
+  const wordDeclencion = (count) => {
+    if (count % 10 === 1 && count !== 11) {
+      return ' товар'
+    }
+    if ([2, 3, 4].includes(count % 10) && ![12, 13, 14].includes(count)) {
+      return ' товара'
+    }
+    return ' товаров'
+  }
+  return productStore.orderedCount + wordDeclencion(productStore.orderedCount)
+})
 
 watch(
   () => props.isShowing,
@@ -41,41 +54,41 @@ watch(
       </div>
 
       <div class="cart__header p-10">
-        <div class="cart__total">4 товара</div>
-        <button class="cart__clear">очистить список</button>
+        <div class="cart__total">{{ countString }}</div>
+        <button class="cart__clear" @click="productStore.clearCart()">очистить список</button>
       </div>
       <div class="cart__items">
-        <div class="cart__item">
+        <div
+          class="cart__item"
+          v-for="p in productStore.orderedProducts"
+          :class="p.isRemoved ? 'cart__item_removed' : ''"
+        >
           <div class="cart__item__img">
-            <img src="@/assets/photos/1.png" alt="фото краски" />
+            <img :src="p.img" :alt="p.title" />
           </div>
           <div class="cart__item__description">
-            <div class="cart__item__title">Краска Wallquest, Brownsone MS90102</div>
-            <div class="cart__item__price">9600 ₽</div>
+            <div class="cart__item__title">{{ p.title }}</div>
+            <div class="cart__item__price">{{ p.orderedCount * p.price }} ₽</div>
           </div>
-          <AddRemoveButton />
-          <div class="cart__item__count">5</div>
-          <AddRemoveButton :remove="true" />
-          <button class="cart__item__button_remove">
+          <AddRemoveButton @click="productStore.addToCart(p.id)" :disabled="p.isRemoved" />
+          <div class="cart__item__count">{{ p.orderedCount }}</div>
+          <AddRemoveButton
+            :remove="true"
+            @click="productStore.removeFromCart(p.id)"
+            :disabled="p.isRemoved"
+          />
+          <button
+            class="cart__item__button_remove"
+            @click="
+              p.isRemoved ? productStore.restoreToCart(p.id) : productStore.removeItemFromCart(p.id)
+            "
+          >
             <svg>
-              <use href="@/assets/sprites.svg#cross"></use>
-            </svg>
-          </button>
-        </div>
-        <div class="cart__item cart__item_removed">
-          <div class="cart__item__img">
-            <img src="@/assets/photos/1.png" alt="фото краски" />
-          </div>
-          <div class="cart__item__description">
-            <div class="cart__item__title">Краска Wallquest, Brownsone MS90102</div>
-            <div class="cart__item__price">9600 ₽</div>
-          </div>
-          <AddRemoveButton />
-          <div class="cart__item__count">5</div>
-          <AddRemoveButton :remove="true" />
-          <button class="cart__item__button_remove">
-            <svg>
-              <use href="@/assets/sprites.svg#restore"></use>
+              <use
+                :href="
+                  p.isRemoved ? '/src/assets/sprites.svg#restore' : '/src/assets/sprites.svg#cross'
+                "
+              ></use>
             </svg>
           </button>
         </div>
@@ -84,7 +97,7 @@ watch(
       <div class="cart__footer">
         <div class="cart__total">
           <div>Итого</div>
-          <div class="cart__total-price">14 400₽</div>
+          <div class="cart__total-price">{{ productStore.orderedPrice }}₽</div>
         </div>
         <button class="cart__order-button">оформить заказ</button>
       </div>
