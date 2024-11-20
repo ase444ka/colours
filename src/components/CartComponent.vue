@@ -4,11 +4,13 @@ import { useProductStore } from '@/store'
 const productStore = useProductStore()
 const emit = defineEmits(['hide'])
 const props = defineProps(['isShowing'])
-import { ref, watch, computed } from 'vue'
+import { ref, watch, computed, onBeforeUnmount } from 'vue'
 
 const hide = () => {
   emit('hide')
 }
+
+onBeforeUnmount(() => {})
 
 const showClass = ref('')
 
@@ -35,6 +37,7 @@ watch(
     } else {
       setTimeout(() => {
         showClass.value = ''
+        productStore.clearRemoved()
       }, 100)
     }
   },
@@ -52,12 +55,13 @@ watch(
           </svg>
         </button>
       </div>
-
-      <div class="cart__header p-10">
-        <div class="cart__total">{{ countString }}</div>
-        <button class="cart__clear" @click="productStore.clearCart()">очистить список</button>
-      </div>
-      <div class="cart__items">
+      <Transition>
+        <div class="cart__header p-10" v-if="productStore.orderedPrice">
+          <div class="cart__total">{{ countString }}</div>
+          <button class="cart__clear" @click="productStore.clearCart()">очистить список</button>
+        </div>
+      </Transition>
+      <div class="cart__items" v-if="productStore.orderedProducts.length">
         <div
           class="cart__item"
           v-for="p in productStore.orderedProducts"
@@ -93,14 +97,16 @@ watch(
           </button>
         </div>
       </div>
-
-      <div class="cart__footer">
-        <div class="cart__total">
-          <div>Итого</div>
-          <div class="cart__total-price">{{ productStore.orderedPrice }}₽</div>
+      <div v-else class="cart__empty-message">Корзина пуста</div>
+      <Transition>
+        <div class="cart__footer" v-if="productStore.orderedPrice">
+          <div class="cart__total">
+            <div>Итого</div>
+            <div class="cart__total-price">{{ productStore.orderedPrice }}₽</div>
+          </div>
+          <button class="cart__order-button">оформить заказ</button>
         </div>
-        <button class="cart__order-button">оформить заказ</button>
-      </div>
+      </Transition>
     </div>
   </div>
 </template>
@@ -117,20 +123,25 @@ watch(
   background: rgba(0, 0, 0, 80%);
   align-items: center;
   max-height: 100vh;
-  overflow-y: auto;
   z-index: 1000;
   &__window {
     display: grid;
     grid-template-rows: auto auto 1fr auto;
-    min-height: 100vh;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
     margin: 0;
     background: var(--white);
     opacity: 1;
-    flex-basis: 600px;
+    flex-basis: 700px;
     padding: 40px;
     z-index: 10000;
     transform: translateX(600px);
     transition: transform 1s;
+    * {
+      background-color: white;
+    }
+
     &-show {
       transform: translateX(0);
     }
@@ -216,5 +227,18 @@ watch(
     border-radius: 4px;
     text-transform: uppercase;
   }
+  &__empty-message {
+    text-align: center;
+    font-size: 18px;
+  }
+}
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.9s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>

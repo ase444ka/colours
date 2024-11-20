@@ -31,6 +31,9 @@ const isActivatedClass = computed(() =>
   & > div {
     margin-bottom: 20px;
   }
+  &__image {
+    height: 50%;
+  }
   &__title {
     font-weight: 300;
   }

@@ -14,14 +14,19 @@ export const useProductStore = defineStore({
     },
     orderedProducts: (state) => state.products.filter((p) => !!p.orderedCount),
     orderedCount() {
-      return this.orderedProducts.reduce((p, c) => (p += c.orderedCount), 0)
+      return this.orderedProducts
+        .filter((p) => !p.isRemoved)
+        .reduce((p, c) => (p += c.orderedCount), 0)
     },
     orderedPrice() {
-      return this.orderedProducts.reduce((p, c) => (p += c.orderedCount * c.price), 0)
+      return this.orderedProducts
+        .filter((p) => !p.isRemoved)
+        .reduce((p, c) => (p += c.orderedCount * c.price), 0)
     },
     removedItems() {
       return this.orderedProducts.filter((p) => p.isRemoved)
     },
+    
   },
 
   actions: {
@@ -51,14 +56,13 @@ export const useProductStore = defineStore({
     },
 
     clearCart() {
-      this.orderedProducts.forEach(p => p.isRemoved = true)
-    }
-  },
-
-  clearRemoved() {
-    this.removedItems.forEach((p) => {
-      p.isRemoved = false
-      p.orderedCount = 0
-    })
+      this.orderedProducts.forEach((p) => (p.isRemoved = true))
+    },
+    clearRemoved() {
+      this.removedItems.forEach((p) => {
+        p.isRemoved = false
+        p.orderedCount = 0
+      })
+    },
   },
 })

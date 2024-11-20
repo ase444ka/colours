@@ -1,6 +1,6 @@
 <script setup>
 import ProductComponent from '@/components/ProductComponent.vue'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import TogglerItem from '@/components/ui/TogglerItem.vue'
 import SliderComponent from '@/components/SliderComponent.vue'
 
@@ -44,11 +44,21 @@ const filters = ref([
     checked: false,
   },
 ])
+
+const appliedFilters = computed(() => {
+  return filters.value.filter((item) => item.checked).map((item) => item.value)
+})
+
+const filteredProducts = computed(() => {
+  if (appliedFilters.value.length) {
+    return productStore.products.filter((p) => appliedFilters.value.every((item) => p[item]))
+  }
+  return productStore.products
+})
 </script>
 
 <template>
   <main>
-    
     <SliderComponent />
     <div class="container">
       <div class="content">
@@ -57,8 +67,9 @@ const filters = ref([
         </div>
         <div class="content__catalog">
           <div class="content__title"></div>
-          <div class="content__products">
-            <ProductComponent v-for="product in productStore.products" :product="product" />
+          <p v-if="!filteredProducts.length">Товаров по вашему запросу не найдено.</p>
+          <div class="content__products" v-else>
+            <ProductComponent v-for="product in filteredProducts" :product="product" />
           </div>
         </div>
       </div>
