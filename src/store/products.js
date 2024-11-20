@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import productsApi from '@/api'
+import { shuffle } from '@/utils'
 
 export const useProductStore = defineStore({
   id: 'product',
@@ -26,7 +27,6 @@ export const useProductStore = defineStore({
     removedItems() {
       return this.orderedProducts.filter((p) => p.isRemoved)
     },
-    
   },
 
   actions: {
@@ -63,6 +63,20 @@ export const useProductStore = defineStore({
         p.isRemoved = false
         p.orderedCount = 0
       })
+    },
+
+    downSort() {
+      console.log('down')
+      this.products.sort((a, b) => b.price - a.price)
+    },
+
+    upSort() {
+      console.log('up')
+      this.products.sort((a, b) => a.price - b.price)
+    },
+
+    shuffle() {
+      shuffle(this.products)
     },
   },
 })

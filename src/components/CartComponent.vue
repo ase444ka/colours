@@ -5,6 +5,7 @@ const productStore = useProductStore()
 const emit = defineEmits(['hide'])
 const props = defineProps(['isShowing'])
 import { ref, watch, computed, onBeforeUnmount } from 'vue'
+import { productCountDeclencion } from '@/utils'
 
 const hide = () => {
   emit('hide')
@@ -15,16 +16,7 @@ onBeforeUnmount(() => {})
 const showClass = ref('')
 
 const countString = computed(() => {
-  const wordDeclencion = (count) => {
-    if (count % 10 === 1 && count !== 11) {
-      return ' товар'
-    }
-    if ([2, 3, 4].includes(count % 10) && ![12, 13, 14].includes(count)) {
-      return ' товара'
-    }
-    return ' товаров'
-  }
-  return productStore.orderedCount + wordDeclencion(productStore.orderedCount)
+  return productCountDeclencion(productStore.orderedCount)
 })
 
 watch(

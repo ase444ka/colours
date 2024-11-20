@@ -69,6 +69,11 @@
 
     </symbol>
 
+    <symbol id="arrow-down">
+      <path d="M5 7.5L8.4641 3L1.5359 3L5 7.5Z" fill="#000000" />
+
+    </symbol>
+
 
 
 

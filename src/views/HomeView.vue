@@ -1,10 +1,12 @@
 <script setup>
+import DropdownComponent from '@/components/ui/DropdownComponent.vue'
 import ProductComponent from '@/components/ProductComponent.vue'
 import { onMounted, ref, computed } from 'vue'
 import TogglerItem from '@/components/ui/TogglerItem.vue'
 import SliderComponent from '@/components/SliderComponent.vue'
 
 import { useProductStore } from '@/store'
+import { productCountDeclencion } from '@/utils'
 
 const productStore = useProductStore()
 async function getProducts() {
@@ -12,7 +14,7 @@ async function getProducts() {
     await productStore.getProducts()
     console.log(productStore.products.value)
   } catch (e) {
-    alert('не удалось получить продукты, ошибка ', e.message)
+    alert(`не удалось получить продукты, ошибка ${e.message}`)
   }
 }
 
@@ -55,6 +57,20 @@ const filteredProducts = computed(() => {
   }
   return productStore.products
 })
+
+const sortProducts = (param) => {
+  switch (param) {
+    case 'chip':
+      productStore.upSort()
+      return
+    case 'expensive':
+      productStore.downSort()
+      return
+    default:
+      productStore.shuffle()
+      return
+  }
+}
 </script>
 
 <template>
@@ -66,7 +82,14 @@ const filteredProducts = computed(() => {
           <TogglerItem v-for="f in filters" :key="f.label" v-model="f.checked" :label="f.label" />
         </div>
         <div class="content__catalog">
-          <div class="content__title"></div>
+          <div class="content__title">
+            <div class="content__total">
+              {{ productCountDeclencion(filteredProducts.length) }}
+            </div>
+            <div class="content__menu">
+              <DropdownComponent @change="(e) => sortProducts(e)" />
+            </div>
+          </div>
           <p v-if="!filteredProducts.length">Товаров по вашему запросу не найдено.</p>
           <div class="content__products" v-else>
             <ProductComponent v-for="product in filteredProducts" :product="product" />
@@ -84,6 +107,15 @@ const filteredProducts = computed(() => {
   grid-template-columns: 180px 1fr;
   gap: 110px;
 
+  &__title {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    text-transform: uppercase;
+    height: 50px;
+    font-weight: 500;
+  }
+
   &__filters {
     display: flex;
     flex-direction: column;
@@ -93,6 +125,11 @@ const filteredProducts = computed(() => {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 24px;
+  }
+
+  &__menu {
+    position: relative;
+    width: 240px;
   }
 }
 </style>
