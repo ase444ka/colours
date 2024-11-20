@@ -145,34 +145,7 @@ watch(
   &__clear {
     color: var(--grey3);
   }
-  &__item {
-    display: grid;
-    grid-template-columns: max-content 220px repeat(4, max-content);
-    align-items: center;
-    border-top: 1px solid var(--grey1);
-    gap: 20px;
-    padding: 25px 0;
-    &__img {
-      width: 96px;
-      height: 96px;
-    }
-    &__title {
-      font-weight: 300;
-    }
-    &__price {
-      font-weight: 600;
-    }
-    &__remove-restore {
-      background-color: var(--grey2);
-    }
-    button svg {
-      height: 24px;
-      width: 24px;
-    }
-    &_removed :not(:last-child) {
-      opacity: 0.4;
-    }
-  }
+
   &__footer {
     display: flex;
     justify-content: space-between;
