@@ -1,14 +1,18 @@
 <template>
   <div class="slide">
     <img :src="`/src/assets/slides/${img}`" />
-    <div class="slide__content">
+    <div class="slide__content" :class="colorClass">
       <h2>{{ title }}</h2>
       <p>{{ text }}</p>
     </div>
   </div>
 </template>
 <script setup>
-const props = defineProps(['img', 'title', 'text'])
+import { computed } from 'vue'
+const props = defineProps(['img', 'title', 'text', 'color'])
+const colorClass = computed(() =>
+  props.color === 'black' ? 'slide__content_black' : 'slide__content_white',
+)
 </script>
 <style lang="scss">
 .slide {
@@ -19,23 +23,34 @@ const props = defineProps(['img', 'title', 'text'])
   img {
     width: 100%;
     object-fit: contain;
+    position: absolute;
+    bottom: 0;
+    left: 0;
   }
   &__content {
     position: absolute;
     z-index: 100;
-    color: var(--white);
     left: calc(50% - 300px);
     top: calc(50% - 100px);
     width: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    &_white {
+      color: #ffffff;
+    }
+    &_black {
+      color: var(--black);
+      background-color: rgba(255, 255, 255, 0.6);
+    }
   }
   h2 {
     font-size: 72px;
   }
   p {
-    font-weight: bold;
+    font-weight: 500;
+    font-size: 2.8vh;
+    letter-spacing: 0.5px;
   }
 }
 .carousel__pagination {

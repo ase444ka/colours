@@ -101,7 +101,7 @@ watch(
   top: 0;
   left: 0;
   right: 0;
-  background: rgba(80%, 80%, 80%, 80%);
+  background: rgba(0, 0, 0, 80%);
   align-items: center;
   max-height: 100vh;
   overflow-y: auto;

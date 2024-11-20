@@ -80,6 +80,7 @@ const productStore = useProductStore()
 }
 header {
   .header-wrapper {
+    padding: 40px 0;
     width: 100%;
     display: grid;
     grid-template-columns: auto 1fr auto auto;

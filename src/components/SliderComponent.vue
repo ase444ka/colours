@@ -9,17 +9,19 @@ const slides = ref([
     img: '1.png',
     title: 'Краски',
     text: 'Идеально подходят для стен и других поверхностей. Найди свой идеальный цвет!',
+    color: 'white'
   },
   {
     img: '2.png',
     title: 'Лаки',
     text: 'Идеально подходят для шкафов и столов. Найди свой идеальный лак!',
+    color: 'black'
   },
 ])
 
 const config = ref({
   wrapAround: true,
-  autoplay: 4000,
+  // autoplay: 4000,
   pauseAutoplayOnHover: true,
   transition: 800,
 })
@@ -42,6 +44,6 @@ const config = ref({
 
 <style lang="scss" scoped>
 .slider {
-  width: 100vw;
+  width: 100%;
 }
 </style>

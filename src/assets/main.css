@@ -9,5 +9,8 @@
 
 .container {
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 1790px;
+  @media screen and (max-width: 1790px) {
+    padding: 0 40px;
+  }
 }
