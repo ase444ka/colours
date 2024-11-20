@@ -14,3 +14,13 @@
     padding: 0 40px;
   }
 }
+
+button:hover {
+  transform: translate3d(1px, 1px, 1px);
+}
+button:active {
+  transform: translate3d(1px, 1px, 1px);
+  -webkit-box-shadow: 2px 2px 20px -7px rgba(34, 60, 80, 0.5);
+  -moz-box-shadow: 2px 2px 20px -7px rgba(34, 60, 80, 0.5);
+  box-shadow: 2px 2px 20px -7px rgba(34, 60, 80, 0.5);
+}
