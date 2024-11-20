@@ -9,13 +9,13 @@ const slides = ref([
     img: '1.png',
     title: 'Краски',
     text: 'Идеально подходят для стен и других поверхностей. Найди свой идеальный цвет!',
-    color: 'white'
+    color: 'white',
   },
   {
     img: '2.png',
     title: 'Лаки',
     text: 'Идеально подходят для шкафов и столов. Найди свой идеальный лак!',
-    color: 'black'
+    color: 'black',
   },
 ])
 
@@ -45,5 +45,8 @@ const config = ref({
 <style lang="scss" scoped>
 .slider {
   width: 100%;
+  @media screen and (max-width: 1200px) {
+    display: none;
+  }
 }
 </style>

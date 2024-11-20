@@ -144,6 +144,7 @@ const sortParams = [
   &_minimized {
     max-height: 32px;
     .dropdown__arrow {
+      display: block;
       transform: rotate(360deg);
       width: 15px;
       height: 15px;
@@ -158,8 +159,7 @@ const sortParams = [
   }
 
   &__arrow {
-    transform: rotate(180deg);
-    transition: transform 0.4s;
+    display: none;
     position: absolute;
     top: 14px;
     right: 12px;
@@ -171,6 +171,12 @@ const sortParams = [
   &__option {
     position: relative;
     padding: 17px 24px;
+    &:first-child {
+      padding-top: 0;
+      label {
+        padding-top: 0 !important;
+      }
+    }
   }
   label {
     padding: 17px 24px;

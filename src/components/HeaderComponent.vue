@@ -25,6 +25,11 @@ const productStore = useProductStore()
   <header>
     <div class="container">
       <div class="header-wrapper">
+        <button class="burger">
+          <svg>
+            <use href="@/assets/sprites.svg#burger"></use>
+          </svg>
+        </button>
         <div class="logo">
           <IconLogo />
         </div>
@@ -77,6 +82,20 @@ const productStore = useProductStore()
 <style lang="scss" scoped>
 .logo {
   width: 131px;
+  @media screen and (max-width: 1200px) {
+    display: none;
+  }
+}
+.burger {
+  display: none;
+  svg {
+    width: 25px;
+    height: 25px;
+  }
+  @media screen and (max-width: 1100px) {
+    display: grid;
+    place-items: center;
+  }
 }
 header {
   .header-wrapper {
@@ -99,6 +118,25 @@ header {
 
 .main-nav {
   margin-left: 180px;
+  @media screen and (max-width: 1300px) {
+    margin-left: 100px;
+  }
+  @media screen and (max-width: 1250px) {
+    margin-left: 50px;
+  }
+  @media screen and (max-width: 1100px) {
+    .main-nav__ul {
+      grid-auto-flow: column;
+    }
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(-200px);
+    width: 200px;
+    flex-direction: column;
+  }
+
   li {
     display: flex;
   }
@@ -106,6 +144,9 @@ header {
 
 .second-nav {
   justify-self: end;
+  @media screen and (max-width: 900px) {
+    display: none;
+  }
   li {
     width: 22px;
     height: 22px;
@@ -136,6 +177,9 @@ svg {
     opacity: 0.3;
     font-size: 14px;
     line-height: 100%;
+  }
+  @media screen and (max-width: 1200px) {
+    margin: auto;
   }
 }
 
