@@ -7,8 +7,13 @@ import { RouterView } from 'vue-router'
   <HeaderComponent />
 
   <RouterView />
+
+  <footer></footer>
 </template>
 
-<style scoped lang="scss">
-
+<style>
+footer {
+  height: 100px;
+  background-color: var(--black);
+}
 </style>
