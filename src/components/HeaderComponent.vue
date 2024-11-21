@@ -3,7 +3,7 @@ import CartComponent from '@/components/CartComponent.vue'
 import IconLogo from '@/components/icons/IconLogo.vue'
 import { useProductStore } from '@/store'
 import { RouterLink } from 'vue-router'
-import { ref } from 'vue'
+import { ref, useTemplateRef } from 'vue'
 
 const cartIsShowing = ref(false)
 const showCart = () => {
@@ -12,6 +12,19 @@ const showCart = () => {
 const hideCart = () => {
   cartIsShowing.value = false
 }
+
+const nav = useTemplateRef('nav')
+
+const toggleNav = () => {
+  if (isBurger.value) {
+    nav.value.classList.add('main-nav__ul_showing')
+  } else {
+    nav.value.classList.remove('main-nav__ul_showing')
+  }
+  isBurger.value = !isBurger.value
+}
+
+const isBurger = ref(true)
 
 const productStore = useProductStore()
 </script>
@@ -25,16 +38,19 @@ const productStore = useProductStore()
   <header>
     <div class="container">
       <div class="header-wrapper">
-        <button class="burger">
-          <svg>
+        <button class="burger" @click="toggleNav">
+          <svg v-if="isBurger">
             <use href="@/assets/sprites.svg#burger"></use>
+          </svg>
+          <svg v-else>
+            <use href="@/assets/sprites.svg#cross"></use>
           </svg>
         </button>
         <div class="logo">
           <IconLogo />
         </div>
         <nav class="main-nav">
-          <ul class="main-nav__ul">
+          <ul class="main-nav__ul" ref="nav">
             <li><RouterLink to="/">продукты</RouterLink></li>
             <li><RouterLink to="/">цвета</RouterLink></li>
             <li><RouterLink to="/">вдохновение</RouterLink></li>
@@ -126,13 +142,27 @@ header {
   }
   @media screen and (max-width: 1100px) {
     .main-nav__ul {
-      grid-auto-flow: column;
+      grid-auto-flow: row;
+      grid-template-rows: repeat(auto-fit, 20px);
+      position: fixed;
+      left: 0;
+      top: 60px;
+      padding: 40px;
+      width: 200px;
+      min-height: 100%;
+      background-color: white;
+      z-index: 500;
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.5s;
+      &_showing {
+        transform: scaleY(1);
+      }
     }
-    display: none;
     position: absolute;
     top: 0;
     left: 0;
-    transform: translateX(-200px);
+    /* transform: translateX(-200px); */
     width: 200px;
     flex-direction: column;
   }
@@ -145,7 +175,9 @@ header {
 .second-nav {
   justify-self: end;
   @media screen and (max-width: 900px) {
-    display: none;
+    li:not(:last-child) {
+      display: none;
+    }
   }
   li {
     width: 22px;
@@ -161,6 +193,9 @@ header {
     justify-content: center;
     font-weight: bold;
     font-size: 12px;
+    @media screen and (max-width: 900px) {
+      display: block;
+    }
   }
 }
 
