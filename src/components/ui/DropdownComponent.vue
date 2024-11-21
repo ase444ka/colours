@@ -167,7 +167,7 @@ const sortParams = [
   &__arrow {
     display: none;
     position: absolute;
-    top: 6px;
+    top: 3px;
     right: 12px;
     width: 16px;
     height: 16px;

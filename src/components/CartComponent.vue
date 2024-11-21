@@ -154,6 +154,12 @@ watch(
     font-weight: 500;
     font-size: 30px;
     line-height: 1;
+    @media screen and (max-width: 600px) {
+      width: auto;
+      padding-left: 5px;
+      padding-right: 5px;
+      font-size: 16px;
+    }
   }
   &__order-button {
     font-weight: 500;
@@ -162,6 +168,11 @@ watch(
     height: 56px;
     border-radius: 4px;
     text-transform: uppercase;
+    @media screen and (max-width: 420px) {
+      width: auto;
+      padding-left: 5px;
+      padding-right: 5px;
+    }
   }
   &__empty-message {
     text-align: center;

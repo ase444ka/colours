@@ -5,6 +5,8 @@ import { useProductStore } from '@/store'
 import { RouterLink } from 'vue-router'
 import { ref, useTemplateRef } from 'vue'
 
+const emit = defineEmits(['showNav'])
+
 const cartIsShowing = ref(false)
 const showCart = () => {
   cartIsShowing.value = true
@@ -28,6 +30,7 @@ const nav = useTemplateRef('nav')
 const toggleNav = () => {
   if (isBurger.value) {
     nav.value.classList.add('main-nav__ul_showing')
+    emit('showNav')
   } else {
     nav.value.classList.remove('main-nav__ul_showing')
   }
@@ -173,7 +176,7 @@ header {
       width: 200px;
       min-height: 100%;
       background-color: white;
-      z-index: 500;
+      z-index: 2000;
       transform: scaleY(0);
       transform-origin: top;
       transition: transform 0.5s;

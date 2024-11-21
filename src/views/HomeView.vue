@@ -153,7 +153,7 @@ const sortProducts = (param) => {
       background-color: white;
       padding-bottom: 20px;
     }
-  }
+    }
 
   &__total {
     @media screen and (max-width: 900px) {
@@ -164,8 +164,10 @@ const sortProducts = (param) => {
   &__filters-toggler {
     display: none;
     @media screen and (max-width: 900px) {
-      display: block;
+      display: flex;
+      padding-top: 3px;
     }
+    text-transform: uppercase;
   }
 
   &__filters {
@@ -223,7 +225,7 @@ const sortProducts = (param) => {
 
   &__menu {
     position: relative;
-    width: 240px;
+    width: 206px;
   }
 }
 </style>

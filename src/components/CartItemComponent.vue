@@ -58,14 +58,27 @@ const props = defineProps(['product'])
     width: 96px;
     height: 96px;
   }
+  &__description {
+    @media screen and (max-width: 700px) {
+      grid-column: span 3;
+    }
+  }
   &__title {
     font-weight: 300;
   }
   &__price {
     font-weight: 600;
   }
+
+  &__count {
+    display: grid;
+    place-items: center;
+  }
   &__remove-restore {
-    background-color: var(--grey2);
+    background-color: var(--grey2) !important;
+    @media screen and (max-width: 420px) {
+      width: 50px;
+    }
   }
   button svg {
     height: 24px;
@@ -73,6 +86,13 @@ const props = defineProps(['product'])
   }
   &_removed :not(:last-child) {
     opacity: 0.4;
+  }
+
+  @media screen and (max-width: 700px) {
+    gap: 5px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    align-items: center;
   }
 }
 </style>
