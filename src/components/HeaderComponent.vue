@@ -143,6 +143,15 @@ header {
       }
     }
   }
+
+  @media screen and (max-width: 900px) {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    padding-bottom: 20px;
+  }
 }
 
 .main-nav {

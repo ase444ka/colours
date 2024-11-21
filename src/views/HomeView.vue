@@ -18,10 +18,10 @@ async function getProducts() {
   }
 }
 
-document.addEventListener('keyup', e => {
+document.addEventListener('keyup', (e) => {
   if (e.key === 'Escape' && showMobileFilters.value) {
-      showMobileFilters.value = false
-    }
+    showMobileFilters.value = false
+  }
 })
 
 const showMobileFilters = ref(false)
@@ -144,6 +144,14 @@ const sortProducts = (param) => {
     font-weight: 500;
     * {
       font-size: 12px !important;
+    }
+    @media screen and (max-width: 900px) {
+      position: sticky;
+      top: 75px;
+      left: 0;
+      right: 0;
+      background-color: white;
+      padding-bottom: 20px;
     }
   }
 
