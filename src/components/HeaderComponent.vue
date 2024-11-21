@@ -13,6 +13,16 @@ const hideCart = () => {
   cartIsShowing.value = false
 }
 
+document.addEventListener('keyup', (e) => {
+  if (e.key === 'Escape' && cartIsShowing.value) {
+    cartIsShowing.value = false
+  }
+
+  if (e.key === 'Escape' && !isBurger.value) {
+    toggleNav()
+  }
+})
+
 const nav = useTemplateRef('nav')
 
 const toggleNav = () => {

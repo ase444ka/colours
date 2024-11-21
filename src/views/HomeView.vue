@@ -18,6 +18,12 @@ async function getProducts() {
   }
 }
 
+document.addEventListener('keyup', e => {
+  if (e.key === 'Escape' && showMobileFilters.value) {
+      showMobileFilters.value = false
+    }
+})
+
 const showMobileFilters = ref(false)
 
 onMounted(getProducts)

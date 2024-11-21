@@ -86,6 +86,12 @@ function initDropdown(dropdown) {
       refreshIndicators(dropdown)
     }
   })
+
+  document.addEventListener('keyup', (e) => {
+    if (e.key === 'Escape') {
+      minimize(dropdown)
+    }
+  })
 }
 
 const changeParam = (value) => {
