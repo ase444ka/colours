@@ -119,6 +119,9 @@ header {
     width: 100%;
     display: grid;
     grid-template-columns: auto 1fr auto auto;
+    @media screen and (max-width: 1300px) {
+      padding-bottom: 0;
+    }
     nav ul {
       display: grid;
       grid-auto-flow: column;

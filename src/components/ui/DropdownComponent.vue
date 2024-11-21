@@ -142,7 +142,7 @@ const sortParams = [
   transition: max-height 0.4s;
   z-index: 100;
   &_minimized {
-    max-height: 28px;
+    max-height: 20px;
     .dropdown__arrow {
       display: block;
       transform: rotate(360deg);
