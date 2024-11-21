@@ -207,7 +207,7 @@ svg {
   height: 100%;
 }
 .phone {
-  font-weight: bold;
+  font-weight: 500;
   font-size: 16px;
   line-height: 100%;
   margin-right: 100px;
