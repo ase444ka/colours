@@ -15,7 +15,7 @@ mock.onGet('/products').reply(function () {
       id: id++,
       title: 'Краска Wallquest, Brownsone MS90102',
       price: randomPrice(),
-      img: `/src/assets/photos/${randomImg()}.png`,
+      img: `src/assets/photos/${randomImg()}.png`,
       new: randomBool(),
       available: randomBool(),
       contract: randomBool(),
