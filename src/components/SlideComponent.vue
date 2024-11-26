@@ -1,6 +1,6 @@
 <template>
   <div class="slide">
-    <img :src="`src/assets/slides/${img}`" />
+    <img :src="`/src/assets/slides/${img}`" />
     <div class="slide__content" :class="colorClass">
       <h2>{{ title }}</h2>
       <p>{{ text }}</p>
