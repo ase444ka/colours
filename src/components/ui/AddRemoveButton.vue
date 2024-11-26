@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 const props = defineProps(['remove'])
 const svgHref = computed(() =>
-  props.remove ? 'src/assets/sprites.svg#minus' : 'src/assets/sprites.svg#plus',
+  props.remove ? '/sprites.svg#minus' : '/sprites.svg#plus',
 )
 </script>
 
