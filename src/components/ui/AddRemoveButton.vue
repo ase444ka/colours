@@ -1,15 +1,13 @@
 <script setup>
-import { computed } from 'vue'
 const props = defineProps(['remove'])
-const svgHref = computed(() =>
-  props.remove ? '/sprites.svg#minus' : '/sprites.svg#plus',
-)
+
 </script>
 
 <template>
   <button class="add-remove-button">
     <svg>
-      <use :href="svgHref"></use>
+      <use v-if="props.remove" href="@/assets/sprites.svg#minus"></use>
+      <use v-else href="@/assets/sprites.svg#plus"></use>
     </svg>
   </button>
 </template>

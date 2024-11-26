@@ -37,9 +37,7 @@ const props = defineProps(['product'])
     >
       <svg>
         <use
-          :href="
-            product.isRemoved ? '/sprites.svg#restore' : '/sprites.svg#cross'
-          "
+          :href="product.isRemoved ? '@/assets/sprites.svg#restore' : '@/assets/sprites.svg#cross'"
         ></use>
       </svg>
     </button>

@@ -43,7 +43,7 @@ watch(
         <h3 class="cart__title">Корзина</h3>
         <button class="cart__close" @click="hide">
           <svg>
-            <use href="/sprites.svg#cross"></use>
+            <use href="@/assets/sprites.svg#cross"></use>
           </svg>
         </button>
       </div>

@@ -121,7 +121,7 @@ const sortParams = [
 <template>
   <div class="dropdown dropdown_minimized" ref="dropdown">
     <svg class="dropdown__arrow">
-      <use href="/sprites.svg#arrow-down"></use>
+      <use href="@/assets/sprites.svg#arrow-down"></use>
     </svg>
     <div class="dropdown__option" v-for="param in sortParams">
       <input
