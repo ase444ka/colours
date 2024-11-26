@@ -34,3 +34,6 @@ coverage
 
 # vscode
 .vscode
+
+#vite
+.vite
