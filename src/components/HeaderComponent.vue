@@ -52,12 +52,8 @@ const productStore = useProductStore()
     <div class="container">
       <div class="header-wrapper">
         <button class="burger" @click="toggleNav">
-          <svg v-if="isBurger">
-            <use href="@/assets/sprites.svg#burger"></use>
-          </svg>
-          <svg v-else>
-            <use href="@/assets/sprites.svg#cross"></use>
-          </svg>
+          <SvgSprite :symbol="isBurger ? 'burger' : 'cross'" />
+
         </button>
         <div class="logo">
           <IconLogo />
@@ -79,23 +75,17 @@ const productStore = useProductStore()
           <ul>
             <li>
               <RouterLink to="/">
-                <svg>
-                  <use href="@/assets/sprites.svg#magnify"></use>
-                </svg>
+                <SvgSprite symbol="magnify" />
               </RouterLink>
             </li>
             <li>
               <RouterLink to="/">
-                <svg>
-                  <use href="@/assets/sprites.svg#user"></use>
-                </svg>
+                <SvgSprite symbol="user" />
               </RouterLink>
             </li>
             <li>
               <RouterLink to="/">
-                <svg>
-                  <use href="@/assets/sprites.svg#heart"></use>
-                </svg>
+                <SvgSprite symbol="heart" />
               </RouterLink>
             </li>
             <li>

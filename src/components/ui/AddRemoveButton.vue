@@ -5,10 +5,8 @@ const props = defineProps(['remove'])
 
 <template>
   <button class="add-remove-button">
-    <svg>
-      <use v-if="props.remove" href="@/assets/sprites.svg#minus"></use>
-      <use v-else href="@/assets/sprites.svg#plus"></use>
-    </svg>
+    <SvgSprite :symbol="props.remove ? 'minus ' : 'plus' " />
+
   </button>
 </template>
 

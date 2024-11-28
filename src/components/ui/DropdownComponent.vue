@@ -120,9 +120,8 @@ const sortParams = [
 
 <template>
   <div class="dropdown dropdown_minimized" ref="dropdown">
-    <svg class="dropdown__arrow">
-      <use href="@/assets/sprites.svg#arrow-down"></use>
-    </svg>
+    <SvgSprite symbol="arrow-down" />
+
     <div class="dropdown__option" v-for="param in sortParams">
       <input
         type="radio"

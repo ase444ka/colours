@@ -35,11 +35,8 @@ const props = defineProps(['product'])
           : productStore.removeItemFromCart(product.id)
       "
     >
-      <svg>
-        <use
-          :href="product.isRemoved ? '@/assets/sprites.svg#restore' : '@/assets/sprites.svg#cross'"
-        ></use>
-      </svg>
+    <SvgSprite :symbol="product.isRemoved ? 'restore' : 'cross'" />
+
     </button>
   </div>
 </template>

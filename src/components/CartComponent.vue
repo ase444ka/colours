@@ -42,9 +42,7 @@ watch(
       <div class="cart__header">
         <h3 class="cart__title">Корзина</h3>
         <button class="cart__close" @click="hide">
-          <svg>
-            <use href="@/assets/sprites.svg#cross"></use>
-          </svg>
+          <SvgSprite symbol="cross" />
         </button>
       </div>
       <Transition>
