@@ -12,7 +12,6 @@ const productStore = useProductStore()
 async function getProducts() {
   try {
     await productStore.getProducts()
-    console.log(productStore.products.value)
   } catch (e) {
     alert(`не удалось получить продукты, ошибка ${e.message}`)
   }
