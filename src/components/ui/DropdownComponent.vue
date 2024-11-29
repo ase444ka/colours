@@ -104,7 +104,7 @@ const sortParams = [
     text: 'сначала дорогие',
   },
   {
-    value: 'chip',
+    value: 'cheap',
     text: 'сначала недорогие',
   },
   {
