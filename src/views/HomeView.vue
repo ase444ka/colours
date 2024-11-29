@@ -162,12 +162,12 @@ const sortProducts = (param) => {
   }
 
   &__filters-toggler {
+    text-transform: uppercase;
     display: none;
     @media screen and (max-width: 900px) {
       display: flex;
       padding-top: 3px;
     }
-    text-transform: uppercase;
   }
 
   &__filters {
