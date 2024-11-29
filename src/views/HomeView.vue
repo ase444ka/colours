@@ -73,7 +73,7 @@ const checkAndHide = (e) => {
   }
 }
 
-const sortProductsducts = (param) => {
+const sortProducts = (param) => {
   switch (param) {
     case 'cheap':
       productStore.upSort()
