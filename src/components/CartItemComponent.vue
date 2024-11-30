@@ -16,14 +16,15 @@ const props = defineProps(['product'])
       <div class="cart__item__price">{{ product.orderedCount * product.price }} ₽</div>
     </div>
     <AddRemoveButton
-      @click="productStore.addToCart(product.id)"
+      :remove="true"
+      @click="productStore.removeFromCart(product.id)"
       :disabled="product.isRemoved"
       class="cart__item__remove-restore"
     />
     <div class="cart__item__count">{{ product.orderedCount }}</div>
+
     <AddRemoveButton
-      :remove="true"
-      @click="productStore.removeFromCart(product.id)"
+      @click="productStore.addToCart(product.id)"
       :disabled="product.isRemoved"
       class="cart__item__remove-restore"
     />
@@ -35,8 +36,7 @@ const props = defineProps(['product'])
           : productStore.removeItemFromCart(product.id)
       "
     >
-    <SvgSprite :symbol="product.isRemoved ? 'restore' : 'cross'" />
-
+      <SvgSprite :symbol="product.isRemoved ? 'restore' : 'cross'" />
     </button>
   </div>
 </template>

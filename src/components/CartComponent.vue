@@ -34,10 +34,17 @@ watch(
     }
   },
 )
+
+const closeCart = (e) => {
+  if (!e.target.classList.contains('cart')) {
+    return
+  }
+  hide()
+}
 </script>
 
 <template>
-  <div class="cart">
+  <div class="cart" @click="closeCart">
     <div class="cart__window" :class="showClass">
       <div class="cart__header">
         <h3 class="cart__title">Корзина</h3>

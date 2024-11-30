@@ -33,10 +33,13 @@ const isActivatedClass = computed(() =>
   }
   &__image {
     height: 50%;
+    display: flex;
+    justify-content: center;
   }
   &__title {
     font-weight: 300;
   }
+
   &__details {
     display: flex;
     justify-content: space-between;
